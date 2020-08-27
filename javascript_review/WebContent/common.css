@@ -1,0 +1,97 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Pen+Script&display=swap');
+
+/* 메뉴 선택시 적용 */
+.menuActive {
+	background-color: gray;
+	color : yellow;
+	
+}
+
+/*회원목록*/
+#members {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#members td, #members th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#members tr:nth-child(even){background-color: #f2f2f2;}
+
+#members tr:hover {background-color: #ddd;}
+
+#members th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*곧통 css*/
+.page_title{
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 30px;
+	color: coral;
+	background-color:aqua;
+}
+
+.label {
+	color: coral;
+	display : inline-block;
+	width : 150px;
+	/*font-weight : bold;*/
+	-webkit-text-stroke-width: thick;
+}
+
+.regist input, textarea{
+	color:coral;
+	border : 1px dotted blue;
+}
+
+label{
+	width : 150px;
+	display : inline-block;
+}
+.label2{
+	width : 50px;
+}
+
+ul.search{
+list-style-type: none;
+border : 1px solid green;	
+}
+.search li{
+	display: inline-block;
+}
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.menu li{
+  float: left;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+.menu li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menu li a:hover {
+  background-color: gray;
+}
