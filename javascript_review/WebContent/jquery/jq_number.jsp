@@ -18,11 +18,13 @@ crossorigin="anonymous"></script>
 	<button type="button">초기화</button>
 	<div id="divResult">	</div>
 	<script>
-			//$("#num1").val() = Math.floor(Math.random()*100);
-			$("#num1").val("Math.floor(Math.random()*100)");
-			//$("#num2").val() = Math.floor(Math.random()*100);
-			$("#num2").val("Math.floor(Math.random()*100)");
 			
+			
+			//$("#num1").val() = Math.floor(Math.random()*100);
+			$("#num1").val(Math.floor(Math.random()*100));
+			//$("#num2").val() = Math.floor(Math.random()*100);
+			$("#num2").val(Math.floor(Math.random()*100));
+		
 			var cntRight=0;
 			var cntWrong=0;
 			function checkResult(){
@@ -39,7 +41,7 @@ crossorigin="anonymous"></script>
 				}
 			
 				if((cntRight+cntWrong) == 5){
-					window.alert((cntRight*20) + "점입니다.");
+					$("window").alert((cntRight*20) + "점입니다.");
 					//btnResult.disabled = "disabled";
 					$("#btnResult").attr("disabled","disabled").html("");
 					//아이디 기준으로 하네?
@@ -60,7 +62,7 @@ crossorigin="anonymous"></script>
 				$("#result").val("");
 			}
 			
-			$("#btnResult").on("click","checkResult").
+			$("#btnResult").on("click","checkResult");
 			
 </script>
 </body>
