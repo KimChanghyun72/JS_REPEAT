@@ -13,7 +13,7 @@
 	
 	function init(){
 		//클래스가 타이틀인 태그 찾기.
-		var titles = document.getElementsByClassName("title");
+		/*var titles = document.getElementsByClassName("title");
 		for(i=0; i<titles.length; i++){
 			titles[i].addEventListener("mouseenter", function(){
 				var price = this.parentNode.getElementsByClassName("price")[0];
@@ -23,14 +23,18 @@
 				var price = this.parentNode.getElementsByClassName("price")[0];
 				price.style.display="none";
 			})
-		}
-		/*var titles = document.querySelectorAll(".title");
+		}*/
+		var titles = document.querySelectorAll(".title");
 		for(price of titles){
 			price.addEventListener("mouseenter", function(){
 				var price = this.parentNode.getElementsByClassName("price")[0];
 				price.style.display="inline";
+		});
+			price.addEventListener("mouseleave", function(){
+				var price = this.parentNode.getElementsByClassName("price")[0];
+				price.style.display="none";
+		});
 		}
-		}*/
 	}
 </script>
 </head>

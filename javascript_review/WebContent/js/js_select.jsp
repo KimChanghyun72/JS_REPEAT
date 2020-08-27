@@ -9,10 +9,17 @@
 <body>
 <input id="txtFruit">
 <button type="button" id="btnAdd" onclick="addFruit()">추가</button>
-<button type="button" id="btnRm" onclick="rmFruit()">제거</button>
-<select id="listFruit" size="10"></select>
+<button type="button" id="btnRm" onclick="rmFruit()">제거</button><br>
+
+<select multiple id="listFruit" size="10"></select>
 
 <script>
+
+txtFruit.addEventListener("keypress", function(){
+	if(event.keyCode==13){
+		addFruit();
+	}
+});
 function addFruit(){
 	var x = document.getElementById("listFruit");
 	var option = document.createElement("option");
@@ -27,7 +34,9 @@ function addFruit(){
 }
 function rmFruit(){
 	var x = document.getElementById("listFruit");
-	x.remove(x.selectedIndex);
+	for(i=0; i<x.length; i++){
+		x.remove(x.selectedIndex);
+	}
 }	
 </script>
 </body>
