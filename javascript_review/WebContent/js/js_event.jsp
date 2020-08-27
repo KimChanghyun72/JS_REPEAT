@@ -25,7 +25,7 @@
 			})
 		}*/
 		var titles = document.querySelectorAll(".title");
-		for(price of titles){
+		for(price in titles){
 			price.addEventListener("mouseenter", function(){
 				var price = this.parentNode.getElementsByClassName("price")[0];
 				price.style.display="inline";

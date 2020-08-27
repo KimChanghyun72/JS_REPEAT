@@ -14,14 +14,14 @@
 </style>
 <script>
 window.addEventListener("load", function(){
-	/*document.addEventListener("mousemove",function(){
+	document.addEventListener("mousemove",function(){
 		//console.log(event.clientX, event.clientY);
 		console.log(event.button);
 		if(event.button == 0){
 			img1.style.left = event.clientX + "px";
 			img1.style.top = event.clientY + "px";
 		}
-	});*/
+	});
 	
 	document.addEventListener("keydown", function(){
 		console.log(event.keyCode);

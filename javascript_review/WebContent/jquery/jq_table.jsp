@@ -9,10 +9,7 @@
 src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 crossorigin="anonymous"></script>
-<script>
-	//tbody의 2열의 국어 성적의 합계를 계산하여 span 태그에 출력
-	$("#tbl").
-</script>
+
 </head>
 <body>
 <table border="1" id="tbl">
@@ -42,5 +39,13 @@ crossorigin="anonymous"></script>
 	</tbody>
 </table>
 <div>국어합계: <span id="kor"></span></div>
+<script>
+	//tbody의 2열의 국어 성적의 합계를 계산하여 span 태그에 출력
+	$("span#kor").html(
+			parseInt($("td:nth-child(2)").eq(1).html()) + 
+			parseInt($("td:nth-child(2)").eq(2).html()) + 
+			parseInt($("td:nth-child(2)").eq(3).html()));
+
+</script>
 </body>
 </html>
