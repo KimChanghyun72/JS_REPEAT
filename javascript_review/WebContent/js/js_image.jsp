@@ -32,7 +32,9 @@ var imgArr = ["../images/2018-12-14 (1).png",
 		img.addEventListener("mouseout",function(){
 			this.style.width = "100px"})
 	}
-	
+	$('.bxslider').bxSlider({
+			
+	})
 </script>
 </body>
 </html>
