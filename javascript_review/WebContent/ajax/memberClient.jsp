@@ -27,7 +27,56 @@ span {display : inline-block;
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 	//버튼 클릭 이벤트 작성
-
+	$(function(){
+		$(".col").eq(0).on("click","button", infoCheck);
+		$("button#remove").click(rmList);
+	});
+	function rmList(){
+		
+		var listNum =  $(".col:eq(0)>div");
+		for(var i=0; i<listNum.length; i++){
+			if(listNum.eq(i).children().eq(0).html()==$("#id").val()){
+				listNum.eq(i).remove();
+			}
+		}
+		
+	}
+	
+	function infoCheck(event){
+		var peopleNm = $(event.target).parent().children().eq(0).html();
+		var url = "./server/" + peopleNm + ".json";
+		var now = new Date();
+		
+		$.getJSON(url, function(obj){
+			
+			$("#id").val(obj.id);
+			$("#pw").val(obj.id);
+			//radiobox check
+			if(obj.gender=="남"){
+				$("[type='radio']").eq(0).prop("checked",true);
+			}else{
+				$("[type='radio']").eq(1).prop("checked",true);
+			}
+			//job check
+			for(var i=0; i<$("select option").length; i++){
+				if($("select option").eq(i).val()==obj.job){
+					$("select option").eq(i).prop("selected",true);
+				}
+			}
+			//reason check
+			console.log(obj.reason);
+			$("#reason").val(obj.reason);
+			//mailyn check
+			if(obj.mailyn=="Y"){
+				$("[type='checkbox']").prop("checked",true);
+			}else{
+				$("[type='checkbox']").prop("checked",false);
+			}
+			//sysdate check
+			
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -56,7 +105,7 @@ span {display : inline-block;
 				<button type="reset">초기화</button>
 				<button type="button">추가</button>
 				<button type="button">저장</button>
-				<button type="button">삭제</button>
+				<button type="button" id="remove">삭제</button>
 			</div>
 			<div>
 				<label for="id">아디</label>
