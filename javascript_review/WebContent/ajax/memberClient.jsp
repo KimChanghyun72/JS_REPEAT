@@ -40,6 +40,13 @@ span {display : inline-block;
 			}
 		}
 		
+		$("#id").val("");
+		$("#pw").val("");
+		$("[type='radio']").eq(0).prop("checked",false);
+		$("[type='radio']").eq(1).prop("checked",false);
+		$("select option").eq(0).prop("selected",true);
+		$("#reason").val("");
+		$("[type='checkbox']").prop("checked",false);
 	}
 	
 	function infoCheck(event){
@@ -64,7 +71,6 @@ span {display : inline-block;
 				}
 			}
 			//reason check
-			console.log(obj.reason);
 			$("#reason").val(obj.reason);
 			//mailyn check
 			if(obj.mailyn=="Y"){
