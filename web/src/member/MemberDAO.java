@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import board.BoardVO;
 import common.ConnectionManager;
@@ -19,16 +22,21 @@ public class MemberDAO {
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT ID, PASSWORD, NAME, TEL "
+			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND, HOBBY "
 					+ "FROM MEMBER";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				resultVO = new MemberVO();
-				resultVO.setName(rs.getString("id"));
+				
+				resultVO.setId(rs.getString("id"));
 				resultVO.setPassword(rs.getString("password"));
-				resultVO.setName(rs.getString("name"));
-				resultVO.setTel(rs.getString("tel"));
+				resultVO.setJob(rs.getString("job"));
+				resultVO.setReason(rs.getString("reason"));
+				resultVO.setGender(rs.getString("gender"));
+				resultVO.setMailsend(rs.getString("mailsend"));
+				resultVO.setHobby(rs.getString("hobby"));
+				//resultVO.setTel(rs.getString("tel"));
 				
 				
 				list.add(resultVO);
@@ -46,17 +54,20 @@ public class MemberDAO {
 		MemberVO resultVO = null;
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT ID, PASSWORD, NAME, TEL "
-					+ "FROM BOARD WHERE ID=?";
+			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND "
+					+ "FROM MEMBER WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,memberVO.getId());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				resultVO = new MemberVO();
+				
 				resultVO.setId(rs.getString("id"));
 				resultVO.setPassword(rs.getString("password"));
-				resultVO.setName(rs.getString("name"));
-				resultVO.setTel(rs.getString("tel"));
+				resultVO.setJob(rs.getString("job"));
+				resultVO.setReason(rs.getString("reason"));
+				resultVO.setGender(rs.getString("gender"));
+				resultVO.setMailsend(rs.getString("mailsend"));
 				
 			}else {
 				System.out.println("no data");
@@ -73,7 +84,7 @@ public class MemberDAO {
 	public void delete(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "delete from member where id=?";
+			String sql = "DELETE FROM MEMBER WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
 			int r = pstmt.executeUpdate();
@@ -90,9 +101,9 @@ public class MemberDAO {
 	public void update(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "update MEMBER set tel = ? where no=?";
+			String sql = "UPDATE MEMBER SET REASON = ? WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberVO.getTel());
+			pstmt.setString(1, memberVO.getReason());
 			pstmt.setString(2, memberVO.getId());
 			int r = pstmt.executeUpdate();
 			System.out.println(r+"건이 수정됨.");
@@ -110,11 +121,18 @@ public class MemberDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.sql 구문 실행
-			String sql = "insert into MEMBER (id, password, name, tel) "
-						+ " values ('"+ memberVO.getId() + "', '"+ memberVO.getPassword() + "', '"
-						+ memberVO.getName() + "', '" + memberVO.getTel() + "')";
-			Statement stmt = conn.createStatement();
-			int r = stmt.executeUpdate(sql);
+			String sql = "insert into MEMBER (id, password, JOB, REASON, GENDER, MAILSEND, hobby, regdate) "
+						+ " values (?,?,?,?,?,?,?,null)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberVO.getId());
+			pstmt.setString(2, memberVO.getPassword());
+			pstmt.setString(3, memberVO.getJob());
+			pstmt.setString(4, memberVO.getReason());
+			pstmt.setString(5, memberVO.getGender());
+			pstmt.setString(6, memberVO.getMailsend());
+			pstmt.setString(7, memberVO.getHobby());
+			
+			int r = pstmt.executeUpdate();
 			//3.결과 처리
 				System.out.println(r+"건이 처리됨.");
 			
@@ -127,5 +145,51 @@ public class MemberDAO {
 			ConnectionManager.close(conn);
 		}
 		
+	
+		
 	}//end of insert
+	
+	//메일수신회원수 : SELECT COUNT(ID) FROM MEMBER WHERE MAILSEND = 'accept'
+	public int getMailsendCnt() {
+		int cnt = 0;
+		try {
+			conn = ConnectionManager.getConnnect();
+			String sql = "SELECT COUNT(ID) FROM MEMBER WHERE MAILSEND = 'accept'";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+			cnt = rs.getInt(1);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.close(conn);
+		}
+		return cnt;
+	}
+	
+	//성별인원수 : select gender, count(id) cnt from member group by gender
+	public List<HashMap<String, Object>> getGenderCnt(){
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		try {
+			conn = ConnectionManager.getConnnect();
+			String sql = "SELECT GENDER, COUNT(ID) CNT FROM MEMBER GROUP BY GENDER";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("gender", rs.getString("gender"));
+				map.put("cnt", rs.getInt("cnt"));
+				list.add(map);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			ConnectionManager.close(conn);
+		}
+		
+		return list;
+	}
+	
 }
