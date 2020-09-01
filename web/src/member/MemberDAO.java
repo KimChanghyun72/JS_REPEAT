@@ -22,7 +22,7 @@ public class MemberDAO {
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND, HOBBY "
+			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND, HOBBY, REGDATE "
 					+ "FROM MEMBER";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -36,7 +36,7 @@ public class MemberDAO {
 				resultVO.setGender(rs.getString("gender"));
 				resultVO.setMailsend(rs.getString("mailsend"));
 				resultVO.setHobby(rs.getString("hobby"));
-				//resultVO.setTel(rs.getString("tel"));
+				resultVO.setRegdate(rs.getString("regdate"));
 				
 				
 				list.add(resultVO);
@@ -54,7 +54,7 @@ public class MemberDAO {
 		MemberVO resultVO = null;
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND "
+			String sql = "SELECT ID, PASSWORD, JOB, REASON, GENDER, MAILSEND, HOBBY, REGDATE "
 					+ "FROM MEMBER WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,memberVO.getId());
@@ -68,6 +68,8 @@ public class MemberDAO {
 				resultVO.setReason(rs.getString("reason"));
 				resultVO.setGender(rs.getString("gender"));
 				resultVO.setMailsend(rs.getString("mailsend"));
+				resultVO.setHobby(rs.getString("hobby"));
+				resultVO.setRegdate(rs.getString("regdate"));
 				
 			}else {
 				System.out.println("no data");
@@ -121,8 +123,8 @@ public class MemberDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.sql 구문 실행
-			String sql = "insert into MEMBER (id, password, JOB, REASON, GENDER, MAILSEND, hobby, regdate) "
-						+ " values (?,?,?,?,?,?,?,null)";
+			String sql = "insert into MEMBER (id, password, JOB, REASON, GENDER, MAILSEND, HOBBY, REGDATE) "
+						+ " values (?,?,?,?,?,?,?,sysdate)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPassword());

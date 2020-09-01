@@ -1,4 +1,4 @@
-package member;
+package board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,32 +13,30 @@ import dept.DeptVO;
 /**
  * Servlet implementation class MemberSelectServ
  */
-@WebServlet("/member/memberSelect")
-public class MemberSelectServ extends HttpServlet {
+@WebServlet("/board/boardSelect")
+public class BoardSelectServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSelectServ() {
+    public BoardSelectServ() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVO paramVO = new MemberVO();
-		System.out.println(request.getParameter("id"));
-		String id = request.getParameter("id");
+		BoardVO paramVO = new BoardVO();
+		int no = Integer.parseInt(request.getParameter("no"));
 		
-		paramVO.setId(id);
-		System.out.println(paramVO.getId());
+		paramVO.setNo(no);
 		//단건조회
-		MemberDAO dao = new MemberDAO();
-		MemberVO member = dao.selectOne(paramVO);
+		BoardDAO dao = new BoardDAO();
+		BoardVO board = dao.selectOne(paramVO);
 		//조회결과 request 저장
-		request.setAttribute("member", member);
+		request.setAttribute("board", board);
 		//view페이지로 이동(forward)
-		request.getRequestDispatcher("memberSelect.jsp")
+		request.getRequestDispatcher("boardSelect.jsp")
 		.forward(request, response);
 	
 	}

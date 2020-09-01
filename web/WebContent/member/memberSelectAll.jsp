@@ -16,7 +16,7 @@
 	for(MemberVO member : list ){
 %>
 	<tr>
-	<td><a href="memberSelect?Id=<%=member.getId() %>"><%=member.getId() %></a></td>
+	<td><a href="memberSelect?id=<%=member.getId() %>"><%=member.getId() %></a></td>
 	<td><%=member.getPassword() %></td>
 	<td><%=member.getJob() %></td>
 	<td><%=member.getReason() %></td>

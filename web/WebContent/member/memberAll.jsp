@@ -36,8 +36,8 @@
 				<tr>
 				<td><a href="memberSelect.jsp"><%=member.getId() %></a></td>
 				<td><%=member.getPassword() %></td>
-				<td><%=member.getName() %></td>
-				<td><%=member.getTel() %></td>
+				
+				
 				
 				
 				</tr>
