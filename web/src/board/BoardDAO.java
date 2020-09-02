@@ -3,6 +3,7 @@ package board;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -112,17 +113,41 @@ public class BoardDAO {
 		try {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
+			conn.setAutoCommit(false);
 			//2.sql 구문 실행
-			String sql = "insert into board (poster, subject, contents, filename) "
-						+ " values ('"+ boardVO.getPoster() + "', '"+ boardVO.getSubject() + "', '"
-						+ boardVO.getContents() + "', '" + boardVO.getFilename() + "')";
+			//board 조회
+			String seqSql = "select no from seq where tablename = 'board'";
 			Statement stmt = conn.createStatement();
-			int r = stmt.executeUpdate(sql);
+			stmt.executeQuery(seqSql);
+			ResultSet rs = stmt.executeQuery(seqSql);
+			rs.next();
+			int no = rs.getInt(1);
+			
+			//보드 번호 업데이트
+			seqSql = "update seq set no = no+1 where tablename = 'board' ";
+			stmt = conn.createStatement();
+			stmt.executeUpdate(seqSql);
+			//게시글 등록
+			String sql = "insert into board (NO, POSTER, SUBJECT, CONTENTS, LASTPOST,FILENAME) "
+					+ " values (?,?,?,?,sysdate ,?)";
+			//no = select max(no)+1 from board
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.setString(2, boardVO.getPoster());
+			pstmt.setString(3, boardVO.getSubject());
+			pstmt.setString(4, boardVO.getContents());
+			pstmt.setString(5, boardVO.getFilename());
+			int r = pstmt.executeUpdate();
+			conn.commit();
 			//3.결과 처리
 				System.out.println(r+"건이 처리됨.");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			//4.연결 해제

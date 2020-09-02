@@ -10,6 +10,7 @@
 <title>deptSelectAll.jsp</title>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 <table border="1">
 <% 
 	ArrayList<MemberVO> list = (ArrayList<MemberVO>)request.getAttribute("list");

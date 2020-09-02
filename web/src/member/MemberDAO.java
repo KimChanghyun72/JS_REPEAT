@@ -17,6 +17,14 @@ public class MemberDAO {
 	PreparedStatement pstmt;
 	ResultSet rs = null;
 	
+	//싱글톤
+	static MemberDAO instance;
+	public static MemberDAO getInstance() {
+		if(instance==null)
+			instance=new MemberDAO();
+		return instance;
+	}
+	
 	public ArrayList<MemberVO> selectAll(MemberVO memberVO) {
 		MemberVO resultVO = null;
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
@@ -103,7 +111,7 @@ public class MemberDAO {
 	public void update(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "UPDATE MEMBER SET REASON = ? WHERE ID=?";
+			String sql = "UPDATE MEMBER SET REASON = ? , WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getReason());
 			pstmt.setString(2, memberVO.getId());

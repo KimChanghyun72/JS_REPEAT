@@ -1,5 +1,8 @@
+<%@page import="test.ShareObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+	trimDirectiveWhitespaces="true"    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +10,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="dept/DeptInsertFormServ">부서등록폼</a>
-<a href="dept/deptSelectAll">부서전체조회</a>
-<a href="member/memberInsert">회원등록</a>
-<a href="member/memberSelectAll">회원전체조회</a>
+<%-- <% ShareObject obj1 = (ShareObject)application.getAttribute("data1");
+	if(obj1 == null){
+		obj1.setCount(obj1.getCount()+1);
+	application.setAttribute("data1", obj1);
+%>
+<br>application : <%=obj1.getStr() %> : <%=obj1.getCount() %>
 
+<% ShareObject obj2 = (ShareObject)session.getAttribute("data");
+	obj2.setCount(obj2.getCount()+1);
+	//session.setAttribute("data", obj2);
+%>
+<br>session : <%=obj2.getStr() %> : <%=obj2.getCount() %>
+<% } %> --%>
+<%@include file="/common/header.jsp" %>
+메인페이지입니다.
 </body>
 </html>

@@ -41,6 +41,7 @@
 </script>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 	<div class="regist">
 		<form method="post" name="frm" id="frm" action="memberInsert" onsubmit="return inputCheck()">
 			<h3 class="page_title"> 회원등록</h3>

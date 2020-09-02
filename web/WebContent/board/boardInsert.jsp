@@ -27,7 +27,7 @@
 				<label for="contents">Contents : </label>
 				<textarea name="contents"></textarea>
 			</div>
-			<label for="file">file : </label><input type="file" name = "file">
+			<label for="filename">file : </label><input type="file" name = "filename">
 			<div>
 				<button type="reset" >초기화</button>
 				<!-- <button type="button" onclick="inputCheck()">등록</button> -->

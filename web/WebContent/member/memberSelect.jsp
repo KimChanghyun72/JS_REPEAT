@@ -7,6 +7,7 @@
 <title>memberSelect</title>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 <h3 class="page_title">내 정보 조회</h3>
 <div><span class="label">아이디 : </span><span>${member.id}</span></div>
 <div><span class="label">패스워드 : </span><span>${member.password }</span></div>

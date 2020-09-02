@@ -16,7 +16,7 @@
 	for(BoardVO board : list ){
 %>
 	<tr>
-	<td><a href="boardSelect?no=<%=board.getNo() %>"><%=board.getNo() %></a></td>
+	<td><a href="boardSelect?no=<%=board.getNo() %>"> <%=board.getNo() %> </a></td>
 	<td><%=board.getPoster() %></td>
 	<td><%=board.getSubject() %></td>
 	<td><%=board.getContents() %></td>
