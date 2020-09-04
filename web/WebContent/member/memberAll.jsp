@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	</ul>
 	</div>
 	
-	<table id="members">
+	<table id="members" border="1">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -29,22 +30,25 @@
 			</tr>
 		</thead>
 		<tbody>		
-			<%
+			<c:forEach items= "${list}" var="temp">
+				<tr>
+					<td><a href="memberSelect.jsp">${list.id}</a></td>
+					<td>${list.password }</td>
+				</tr>
+			</c:forEach>
+			
+			<%-- <%
 				ArrayList<MemberVO> list = (ArrayList<MemberVO>)request.getAttribute("list");
 				for(MemberVO member : list){
-			%>			
+			%>
+						
 				<tr>
 				<td><a href="memberSelect.jsp"><%=member.getId() %></a></td>
 				<td><%=member.getPassword() %></td>
-				
-				
-				
-				
 				</tr>
-			
 			<%
 				}
-			%>
+			%> --%>
 		</tbody>
 
 	</table>

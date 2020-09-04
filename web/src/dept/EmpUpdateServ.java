@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DeptInsertForm
+ * Servlet implementation class EmpUpdateServ
  */
-@WebServlet("/dept/DeptInsertFormServ")
-public class DeptInsertFormServ extends HttpServlet {
+@WebServlet("/dept/empUpdateServ")
+public class EmpUpdateServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeptInsertFormServ() {
+    public EmpUpdateServ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +26,17 @@ public class DeptInsertFormServ extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("deptInsertForm.jsp")
-				.forward(request, response);
+		//사번으로 단건조회
+		
+		//jobList조회
+		
+		//departmentList조회
+		
+		//사원리스트
+		
+		//request에 저장
+		request.setAttribute("emp", o);
+	
 	}
 
 	/**
