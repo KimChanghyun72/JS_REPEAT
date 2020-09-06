@@ -27,9 +27,7 @@ public class MemberSelectServ extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberVO paramVO = new MemberVO();
-		System.out.println(request.getParameter("id"));
 		String id = request.getParameter("id");
-		
 		paramVO.setId(id);
 		System.out.println(paramVO.getId());
 		//단건조회

@@ -12,7 +12,7 @@
 	<li>${sessionScope.id}님 환영합니다.<a href="logout">로그아웃</a>
 	<li><a href="/web/member/memberUpdate">회원정보 수정(get방식)</a>
 </c:if>
-	<li><a href="/web/dept/DeptInsert">부서등록폼(절대경로)</a>
+	<li><a href="/web/dept/deptInsert">부서등록폼(절대경로)</a>
 	<li><a href="<%=application.getContextPath() %>/dept/deptSelectAll">부서전체조회(상대경로)</a>
 	<li><a href="<%=application.getContextPath() %>/member/memberInsert">회원등록(context경로 (절대경로) 입력)</a>
 	<li><a href="<%=application.getContextPath() %>/member/memberSelectAll">회원전체조회</a>

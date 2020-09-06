@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+<title>empSelectAll.jsp</title>
 <style>
 label {
 	display: inline-block;
@@ -13,42 +13,25 @@ label {
 </style>
 </head>
 <body>
-	<h1>사원등록</h1>
-	<form method="post" action="">
+	<h1>전체 사원 조회</h1>
+	<table border="1">
+		<tr>
+			<th>사원ID</th>
+			<th>사원 이름</th>
+			<th>부서명</th>
+			<th>직군명</th>
+			<th>매니저ID</th>
+		</tr>
 		<c:forEach items="${empList}" var="empList">
-			<div>
-				<label>employeeId</label> <input name="employeeId"
-					value="${empList.employee_id}">
-			</div>
-			<div>
-				<label>firstName</label> <input name="firstName"
-					value="${empList.first_name}">
-			</div>
-			<div>
-				<label>lastName</label> <input name="lastName"
-					value="${empList.last_name }">
-			</div>
-			<div>
-				<label>email</label> <input name="email" value="${empList.email}">
-			</div>
-			<div>
-				<label>hireDate</label> <input name="hireDate"
-					value="${empList.hire_date}">
-			</div>
-			<div>
-				<label>deptId</label> <input name="hireDate"
-					value="${empList.department_id}">
-			</div>
-			<div>
-				<label>jobId</label> <input name="hireDate"
-					value="${empList.job_id}">
-			</div>
-			<div>
-				<label>manager_id</label> <input name="hireDate"
-					value="${empList.manager_id}">
-			</div>
-			<button>등록</button>
+			<tr>
+
+				<td><a href="empUpdate.do?employee_id=${empList.employee_id}">${empList.employee_id}</a></td>
+				<td>${empList.last_name }</td>
+				<td>${empList.department_id}</td>
+				<td>${empList.job_id}</td>
+				<td>${empList.manager_id}</td>
+			</tr>
 		</c:forEach>
-	</form>
+	</table>
 </body>
 </html>
