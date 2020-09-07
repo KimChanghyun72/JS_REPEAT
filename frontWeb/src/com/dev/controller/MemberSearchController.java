@@ -19,7 +19,7 @@ public class MemberSearchController implements Controller {
 		
 		//유효성 체크
 		if(id==null||id=="") {
-			request.setAttribute("error", "창횬곤듀꺼얌 건들지마!!");
+			request.setAttribute("error", "아이디를 입력하세요.");
 			request.setAttribute("errorCode", 1);
 			//search페이지로 포워드
 			request.getRequestDispatcher("/member/memberSearch.jsp").forward(request, response);

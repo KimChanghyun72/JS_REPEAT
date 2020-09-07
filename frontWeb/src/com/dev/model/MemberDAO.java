@@ -90,13 +90,14 @@ public class MemberDAO {
 	return resultVO;	
 	}
 	
-	public void delete(MemberVO memberVO) {
+	public int delete(MemberVO memberVO) {
+		int r= 0;
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "DELETE FROM MEMBER WHERE ID=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getId());
-			int r = pstmt.executeUpdate();
+			r = pstmt.executeUpdate();
 			System.out.println(r+"건이 삭제됨.");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -104,7 +105,7 @@ public class MemberDAO {
 		}finally {
 			ConnectionManager.close(null, pstmt, conn);
 		}
-		
+		return r;
 	}//end of delete
 	
 	public void update(MemberVO memberVO) {

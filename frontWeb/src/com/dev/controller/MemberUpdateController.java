@@ -6,12 +6,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dev.model.MemberDAO;
+import com.dev.model.MemberVO;
+
 public class MemberUpdateController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("회원정보수정(update)");
+		MemberVO member = new MemberVO();
+		String id = request.getParameter("id");
+		member.setId(id);
+		member = MemberDAO.getInstance().selectOne(member);
+		
+		request.setAttribute("memberInfo", member);
+		
+		request.getRequestDispatcher("/member/memberUpdateOutput.jsp").forward(request, response);
 	}
 
 }
