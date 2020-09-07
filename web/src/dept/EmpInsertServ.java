@@ -61,7 +61,6 @@ public class EmpInsertServ extends HttpServlet {
 		empVO.setDepartment_id(request.getParameter("deptId"));
 		empVO.setJob_id(request.getParameter("jobId"));
 		empVO.setManager_id("manager_id");
-		
 
 		EmpDAO dao = new EmpDAO();
 		dao.insert(empVO);
