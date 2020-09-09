@@ -17,21 +17,20 @@ public class MemberDeleteController implements Controller {
 				String id = request.getParameter("id");
 				
 				//유효성 체크
-				if(id==null||id=="") {
-					request.setAttribute("error", "아이디를 입력하세요.");
-					request.setAttribute("errorCode", 1);
-					//search페이지로 포워드
-					request.getRequestDispatcher("/member/memberDelete.jsp").forward(request, response);
-					return;
-				}
+				
 				//vo에 담기
 				MemberVO member = new MemberVO();
 				member.setId(id);
 				
-				//서비스
+				//서비스로직
 				int r = MemberDAO.getInstance().delete(member);
+				
+				//결과 저장
 				request.setAttribute("result", r);
-				request.getRequestDispatcher("/member/memberDeleteOutput.jsp").forward(request, response);
+				
+				//뷰 페이지로 이동
+				request.getRequestDispatcher("/member/memberDeleteOutput.jsp")
+						.forward(request, response);
 				//조회결과를 저장 후에 결과 페이지로 포워드.
 				
 	}

@@ -8,6 +8,6 @@
 </head>
 <body>
 	처리건수 : ${cnt}<br>
-	ID 값 : ${param.id}<br>
+	ID 값 : ${param.id} <%=request.getParameter("id") %><br>
 </body>
 </html>

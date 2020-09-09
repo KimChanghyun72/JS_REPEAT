@@ -8,7 +8,6 @@
 </head>
 <body>
 <h3> 정보 수정 결과 </h3>
-
 ID : <span>${memberInfo.id}</span><br>
 PW : <span>${memberInfo.password}</span><br>
 JOB : <span>${memberInfo.job}</span><br>

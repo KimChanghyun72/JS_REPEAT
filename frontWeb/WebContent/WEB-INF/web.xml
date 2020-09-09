@@ -16,5 +16,9 @@
   	<servlet-name>front</servlet-name>
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
-
+  <!-- <servlet-mapping>
+  	<servlet-name>front</servlet-name>
+  	<url-pattern>*.ac</url-pattern>
+  </servlet-mapping>
+ -->
 </web-app>
