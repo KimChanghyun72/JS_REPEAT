@@ -64,7 +64,7 @@ public class BoardInsertServ extends HttpServlet {
 		//첨부파일 처리
 		Part part = request.getPart("filename");
 		String fileName = getFileName(part);//Long.toString(System.currentTimeMillis());
-		String path = request.getServletContext().getRealPath("/images"); //"c:/upload";
+		String path = "c:/upload";//request.getServletContext().getRealPath("/images"); 
 		System.out.println(path);
 		//if(fileName != null && !fileName.isEmpty()) {
 		//파일명 중복체크
