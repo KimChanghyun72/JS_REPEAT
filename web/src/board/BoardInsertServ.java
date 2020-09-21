@@ -1,25 +1,33 @@
 package board;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
+
 
 import dept.DeptVO;
 
 /**
  * Servlet implementation class MemberInsertServ
  */
-@WebServlet("/board/boardInsert")
+//파라미터 스트림 값을 바운드리(구분기호)로 잘라서 part배열로 만들어줌.
+@MultipartConfig( location = "c:/upload" ,
+				  maxRequestSize = 1024*1024*10)
+@WebServlet("/board/boardInsert.do")
 public class BoardInsertServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,6 +61,18 @@ public class BoardInsertServ extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		//첨부파일 처리
+		Part part = request.getPart("filename");
+		String fileName = getFileName(part);//Long.toString(System.currentTimeMillis());
+		String path = request.getServletContext().getRealPath("/images"); //"c:/upload";
+		System.out.println(path);
+		//if(fileName != null && !fileName.isEmpty()) {
+		//파일명 중복체크
+			File renameFile = FileRenamePolicy.rename(new File(path, fileName));
+			part.write(renameFile.getName());
+			boardVO.setFilename(path+"/" + renameFile.getName());
+		//}
+		
 		//DB 등록 처리
 		BoardDAO dao = new BoardDAO();
 		dao.insert(boardVO);
@@ -60,5 +80,14 @@ public class BoardInsertServ extends HttpServlet {
 		//전체조회. 차후 생성 예정.
 		response.sendRedirect("boardSelectAll");
 	}
-
+	
+	private String getFileName(Part part) throws UnsupportedEncodingException {
+		for (String cd : part.getHeader("Content-Disposition").split(";")) {
+		if (cd.trim().startsWith("filename")) {
+		return cd.substring(cd.indexOf('=') + 1).trim()
+		.replace("\"", "");
+		}
+		}
+		return null;
+		}
 }

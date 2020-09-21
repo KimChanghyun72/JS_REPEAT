@@ -5,7 +5,8 @@ public class DeptVO {
 	private String department_name;
 	private Integer manager_id;
 	private Integer location_id;
-	
+	private Integer first;
+	private Integer last;
 	
 	public DeptVO(Integer department_id) {
 		super();
@@ -24,6 +25,22 @@ public class DeptVO {
 	public String toString() {
 		return "DeptVO [department_id=" + department_id + ", department_name=" + department_name + ", manager_id="
 				+ manager_id + ", location_id=" + location_id + "]";
+	}
+	
+	public Integer getFirst() {
+		return first;
+	}
+
+	public void setFirst(Integer first) {
+		this.first = first;
+	}
+
+	public Integer getLast() {
+		return last;
+	}
+
+	public void setLast(Integer last) {
+		this.last = last;
 	}
 
 	public Integer getDepartment_id() {

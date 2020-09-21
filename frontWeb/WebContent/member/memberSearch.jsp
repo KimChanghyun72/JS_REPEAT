@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memberSearch.jsp</title>
+<title>회원검색</title>
 <script>
-	if('${errorCode}'==1){
-		alert('${error}');
-		}
+	function decoTest(){
+		console.log("test");
+	}
 </script>
 </head>
 <body>

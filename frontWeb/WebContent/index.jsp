@@ -13,7 +13,8 @@
 	<li><a href="member/memberInsert.jsp">멤버 등록</a>
 	<li><a href="member/memberDelete.jsp">멤버 삭제</a>
 	<li><a href="${pageContext.request.contextPath}/memberSelectAll.do">멤버 수정</a>
-	
 </ul>
+
+<% response.sendRedirect("memberList.do"); %>
 </body>
 </html>

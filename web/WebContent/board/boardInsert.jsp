@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="regist">
-		<form method="post" name="frm" id="frm" action="boardInsert">
+		<form method="post" name="frm" id="frm" action="boardInsert.do">
 			<h3 class="page_title"> 게시글등록</h3>
 			<div>
 				<label for="poster">Poster : </label>

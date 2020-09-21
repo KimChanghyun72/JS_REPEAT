@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 import common.ConnectionManager;
 import dept.DeptVO;
 
@@ -14,6 +15,14 @@ public class BoardDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs = null;
+	
+	static BoardDAO instance;
+	public static BoardDAO getInstance() {
+		if(instance==null)
+			instance=new BoardDAO();
+		return instance;
+	}
+	
 	public ArrayList<BoardVO> selectAll(BoardVO boardVO) {
 		BoardVO resultVO = null;
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
@@ -122,13 +131,13 @@ public class BoardDAO {
 			ResultSet rs = stmt.executeQuery(seqSql);
 			rs.next();
 			int no = rs.getInt(1);
-			
+			boardVO.setNo(no);
 			//보드 번호 업데이트
 			seqSql = "update seq set no = no+1 where tablename = 'board' ";
 			stmt = conn.createStatement();
 			stmt.executeUpdate(seqSql);
 			//게시글 등록
-			String sql = "insert into board (NO, POSTER, SUBJECT, CONTENTS, LASTPOST,FILENAME) "
+			String sql = "insert into board (NO, POSTER, SUBJECT, CONTENTS, LASTPOST, FILENAME) "
 					+ " values (?,?,?,?,sysdate ,?)";
 			//no = select max(no)+1 from board
 			PreparedStatement pstmt = conn.prepareStatement(sql);
